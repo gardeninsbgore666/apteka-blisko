@@ -1,6 +1,6 @@
 # Raport końcowy
 
-> **Dokument:** PBL-DOC-006 · **Wersja:** 1.0 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-006 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
 
 ## 1. Cel
 
@@ -15,7 +15,7 @@ Powstała aplikacja webowa z wyszukiwaniem po nazwie, miejscowości i adresie, l
 | Plan | Rezultat | Status |
 |---|---|---|
 | Wyszukanie zbioru na dane.gov.pl | Rejestr aptek Centrum e-Zdrowia | Zrealizowano |
-| Proste demo | Responsywna wyszukiwarka z próbką | Zrealizowano |
+| Proste demo | Responsywna wyszukiwarka; Docker pobiera pełny rejestr, próbka działa lokalnie | Zrealizowano |
 | Pobieranie danych bez commitowania dużych plików | Skrypt zapisuje dane lokalnie | Zrealizowano |
 | Dokumentacja, testy i CI | Dodano pliki projektu i workflow | Zrealizowano |
 | Publiczne repozytorium i hosting demo | Wymaga publikacji przez zespół | Do wykonania |

@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 
-const files = ['src/server.js', 'src/app.js', 'scripts/download_data.js', 'scripts/lint.js', 'tests/download_data.test.js'];
+const files = ['src/server.js', 'src/app.js', 'src/search.js', 'scripts/download_data.js', 'scripts/lint.js', 'tests/download_data.test.js', 'tests/search.test.js'];
 let failed = false;
 for (const file of files) {
   const source = await readFile(file, 'utf8');

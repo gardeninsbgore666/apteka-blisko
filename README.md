@@ -1,6 +1,6 @@
 # Apteka Blisko
 
-> **Dokument:** PBL-DOC-001 · **Wersja:** 1.0 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-001 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
 
 Apteka Blisko to otwarta, bezpłatna wyszukiwarka aptek zarejestrowanych w Polsce. Pomaga szybko znaleźć nazwę i adres apteki w miejscowości lub okolicy. Każdy wynik ma odnośnik do mapy.
 
@@ -20,9 +20,9 @@ Wymagania: Node.js 20+ albo Docker z Docker Compose. Bez dodatkowych pakietów.
 docker compose up --build
 ```
 
-Otwórz http://localhost:8080. Zatrzymanie: `Ctrl+C`.
+Podczas budowania obrazu Docker skrypt pobiera pełny rejestr przez API dane.gov.pl (wymagany dostęp do internetu). Otwórz http://localhost:8080. Zatrzymanie: `Ctrl+C`.
 
-Alternatywnie: `node src/server.js`, a następnie http://localhost:8080.
+Alternatywnie, aby uruchomić aplikację z próbką: `node src/server.js`, a następnie http://localhost:8080. Pełne dane pobierzesz przed uruchomieniem przez `node scripts/download_data.js`.
 
 Pobranie i przetworzenie aktualnych danych (wymaga dostępu do internetu):
 

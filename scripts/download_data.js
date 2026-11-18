@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const API_URL = 'https://api.dane.gov.pl/1.4/resources/56869';
+const CURRENT_CSV_URL = 'https://rejestry.ezdrowie.gov.pl/api/ra/filegenerator/getcsv';
 export const FIELDS = ['name', 'street', 'postal_code', 'city', 'phone'];
 const aliases = {
   name: ['nazwa_apteki', 'nazwa', 'nazwa_podmiotu', 'nazwapodmiotu'],
@@ -77,8 +78,9 @@ async function main() {
     const attributes = metadata.data?.attributes || {};
     const downloadUrl = attributes.download_url || attributes.downloadUrl || attributes.link || attributes.url;
     if (!downloadUrl) throw new Error('API dane.gov.pl nie zwróciło linku do pliku CSV dla zasobu 56869.');
-    const response = await fetch(new URL(downloadUrl, API_URL), { signal: AbortSignal.timeout(90_000), headers: { 'user-agent': headers['user-agent'] } });
-    if (!response.ok) throw new Error(`Źródło zwróciło HTTP ${response.status}`);
+    let response = await fetch(new URL(downloadUrl, API_URL), { signal: AbortSignal.timeout(90_000), headers: { 'user-agent': headers['user-agent'] } });
+    if (!response.ok) response = await fetch(CURRENT_CSV_URL, { signal: AbortSignal.timeout(90_000), headers: { 'user-agent': headers['user-agent'] } });
+    if (!response.ok) throw new Error(`Plik źródłowy zwrócił HTTP ${response.status}`);
     const records = normalize(await response.text());
     await mkdir(path.dirname(destination), { recursive: true });
     const output = [FIELDS.join(','), ...records.map((record) => FIELDS.map((field) => csvCell(record[field])).join(','))].join('\n');

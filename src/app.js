@@ -1,3 +1,5 @@
+import { matchesQuery } from './search.js';
+
 const query = document.querySelector('#query');
 const list = document.querySelector('#results-list');
 const count = document.querySelector('#result-count');
@@ -5,19 +7,15 @@ const area = document.querySelector('#area-label');
 const state = document.querySelector('#data-state');
 let pharmacies = [];
 
-function fold(value) {
-  return String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pl').trim();
-}
-
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 }
 
 function render() {
-  const term = fold(query.value);
-  const matches = pharmacies.filter((item) => fold(Object.values(item).join(' ')).includes(term));
+  const term = query.value.trim();
+  const matches = pharmacies.filter((item) => matchesQuery(item, term));
   count.textContent = `${matches.length.toLocaleString('pl-PL')} ${matches.length === 1 ? 'wynik' : 'wyników'}`;
-  area.textContent = term ? `dla „${query.value.trim()}”` : 'w Polsce';
+  area.textContent = term ? `dla „${term}”` : 'w Polsce';
   if (!matches.length) {
     list.innerHTML = '<div class="empty">Nie znaleźliśmy apteki. Sprawdź pisownię albo wpisz samą nazwę miejscowości.</div>';
     return;
@@ -40,7 +38,7 @@ fetch('/api/pharmacies').then((response) => {
   return response.json();
 }).then((payload) => {
   pharmacies = payload.records || [];
-  state.textContent = payload.source === 'live' ? 'Aktualny lokalny rejestr' : 'Próbka demonstracyjna';
+  state.textContent = payload.source === 'live' ? 'Pełny rejestr aptek' : 'Próbka demonstracyjna';
   render();
 }).catch(() => {
   state.textContent = 'Błąd wczytywania';

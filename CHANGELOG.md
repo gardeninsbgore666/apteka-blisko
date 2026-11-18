@@ -1,6 +1,11 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.0 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+
+## 1.1.0 — 2026-11-18
+
+- Wyszukiwanie przyjmuje frazy z przecinkami i skrótami adresowymi, np. „Gdańsk, ul. Mostowa”.
+- Obraz Docker pobiera pełny rejestr aptek w czasie budowania; dane nadal nie trafiają do Git.
 
 ## 1.0.0 — 2026-11-18
 
