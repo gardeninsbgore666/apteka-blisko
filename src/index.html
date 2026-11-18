@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <meta name="description" content="Znajdź aptekę według miejscowości, nazwy lub adresu.">
+  <title>Apteka Blisko — znajdź aptekę</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/" aria-label="Apteka Blisko — strona główna"><span class="brand-mark" aria-hidden="true">+</span> Apteka <b>Blisko</b></a><span class="open-data">Oparte na otwartych danych</span></header>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy"><p class="eyebrow">PROSTY SPOSÓB, BY ZNALEŹĆ POMOC</p><h1 id="title">Znajdź aptekę<br><em>w swojej okolicy.</em></h1><p class="intro">Wyszukaj zarejestrowane apteki po miejscowości, nazwie albo adresie. Wyniki pochodzą z publicznego rejestru.</p></div>
+      <div class="search-panel"><label for="query">Gdzie szukasz?</label><div class="search-row"><span class="search-icon" aria-hidden="true">⌕</span><input id="query" type="search" placeholder="Np. Gdańsk, Długa, 00-001" autocomplete="off"><button id="clear" type="button" aria-label="Wyczyść wyszukiwanie">×</button></div><div class="search-meta"><span id="result-count" aria-live="polite">Ładowanie danych…</span><button id="show-all" type="button">Pokaż wszystkie</button></div></div>
+    </section>
+    <section class="results" aria-labelledby="results-title"><div class="results-heading"><div><p class="eyebrow">WYNIKI WYSZUKIWANIA</p><h2 id="results-title">Apteki <span id="area-label">w Polsce</span></h2></div><span class="updated" id="data-state">Ładowanie rejestru</span></div><div id="results-list" class="cards" aria-live="polite"></div><p class="disclaimer"><span aria-hidden="true">ⓘ</span> Rejestr nie podaje bieżących godzin otwarcia ani dostępności leków. Zadzwoń do apteki przed wizytą.</p></section>
+  </main>
+  <footer><span>Apteka Blisko <span id="year"></span></span><span>Dane: <a href="https://dane.gov.pl/pl/dataset/1925/resource/56869" target="_blank" rel="noreferrer">Rejestr aptek · dane.gov.pl</a></span><span>Projekt open source · MIT</span></footer>
+</body>
+</html>

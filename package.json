@@ -1,0 +1,13 @@
+{
+  "name": "apteka-blisko",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test tests/download_data.test.js",
+    "lint": "node scripts/lint.js",
+    "start": "node src/server.js",
+    "data:update": "node scripts/download_data.js"
+  }
+}

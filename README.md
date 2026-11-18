@@ -1,0 +1,61 @@
+# Apteka Blisko
+
+> **Dokument:** PBL-DOC-001 · **Wersja:** 1.0 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+
+Apteka Blisko to otwarta, bezpłatna wyszukiwarka aptek zarejestrowanych w Polsce. Pomaga szybko znaleźć nazwę i adres apteki w miejscowości lub okolicy. Każdy wynik ma odnośnik do mapy.
+
+## Problem i użyteczność
+
+Rozproszone rejestry są trudne do przeszukiwania na telefonie i bez wiedzy o ich strukturze. Aplikacja upraszcza wyszukiwanie po miejscowości, nazwie i adresie. Rejestr nie gwarantuje, że apteka jest aktualnie otwarta ani że ma dany lek — przed wizytą warto skontaktować się z placówką.
+
+## Dane
+
+Źródłem jest [Rejestr aptek udostępniony w katalogu dane.gov.pl](https://dane.gov.pl/pl/dataset/1925/resource/56869), którego dostawcą jest Centrum e-Zdrowia. Skrypt pobiera aktualny plik CSV z publicznego endpointu rejestru i tworzy lokalny, znormalizowany indeks. Plik z pełnymi danymi nie jest częścią repozytorium. Mała próbka w `src/data/sample_pharmacies.csv` służy do demonstracji i testów.
+
+## Uruchomienie
+
+Wymagania: Node.js 20+ albo Docker z Docker Compose. Bez dodatkowych pakietów.
+
+```bash
+docker compose up --build
+```
+
+Otwórz http://localhost:8080. Zatrzymanie: `Ctrl+C`.
+
+Alternatywnie: `node src/server.js`, a następnie http://localhost:8080.
+
+Pobranie i przetworzenie aktualnych danych (wymaga dostępu do internetu):
+
+```bash
+node scripts/download_data.js
+```
+
+Po pobraniu odśwież stronę. Dane zostaną zapisane lokalnie w `data/pharmacies.csv`, katalog `data/` jest ignorowany przez Git.
+
+## Użycie
+
+Wpisz miejscowość, nazwę apteki, ulicę lub kod pocztowy. Lista filtruje się na bieżąco. Przycisk „Pokaż na mapie” otwiera mapę w nowej karcie. Wersja demonstracyjna korzysta z jawnie oznaczonej próbki.
+
+## Struktura
+
+- `src/` — aplikacja webowa i serwer demonstracyjny.
+- `tests/` — testy normalizacji danych.
+- `scripts/` — pobranie i przygotowanie danych źródłowych.
+- `docs/` — raport, lessons learned i opis danych.
+- `.github/` — szablony zgłoszeń i CI.
+
+## Jakość i wydajność
+
+Indeks pobiera się raz na żądanie, a filtrowanie odbywa się po stronie przeglądarki w pamięci. Interfejs nie wysyła zapytań do zewnętrznego API przy każdym wpisanym znaku. Skrypt usuwa puste rekordy i duplikaty po identyfikatorze, zachowując wybrane pola. Pomiar czasu odpowiedzi zależy od urządzenia i wielkości pobranego rejestru; przed prezentacją zmierz czas pierwszego wyświetlenia i filtrowania na używanym sprzęcie, nie wpisuj wyników bez pomiaru.
+
+## Rozwój
+
+Zobacz [CONTRIBUTING.md](CONTRIBUTING.md), [kodeks postępowania](CODE_OF_CONDUCT.md), [raport końcowy](docs/FINAL_REPORT.md) oraz [lessons learned](docs/LESSONS_LEARNED.md).
+
+## Wykorzystanie AI
+
+Przygotowanie tego szkicu wspierał OpenAI Codex (model GPT-6): pomógł dobrać pomysł, napisać kod, testy i dokumentację. Zespół powinien samodzielnie zweryfikować działanie aplikacji i dopasować opis do faktycznego podziału pracy przed oddaniem.
+
+## Licencja
+
+MIT — szczegóły w pliku [LICENSE](LICENSE). Dane źródłowe podlegają warunkom opisanym przez ich dostawcę; repozytorium nie redystrybuuje pełnego rejestru.
