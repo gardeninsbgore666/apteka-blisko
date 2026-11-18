@@ -4,6 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const API_URL = 'https://api.dane.gov.pl/1.4/resources/56869';
 const CURRENT_CSV_URL = 'https://rejestry.ezdrowie.gov.pl/api/ra/filegenerator/getcsv';
+const LEGACY_CSV_URL = 'https://rejestry.ezdrowie.gov.pl/api/filegenerator/getcsv';
 export const FIELDS = ['name', 'street', 'postal_code', 'city', 'phone'];
 const aliases = {
   name: ['nazwa_apteki', 'nazwa', 'nazwa_podmiotu', 'nazwapodmiotu'],
@@ -70,22 +71,49 @@ function csvCell(value) { return `"${String(value).replaceAll('"', '""')}"`; }
 async function main() {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   const destination = path.join(root, 'data', 'pharmacies.csv');
+  const requestHeaders = { 'user-agent': 'AptekaBlisko/1.0 (open data project)' };
+  const downloadUrls = [];
+  const errors = [];
   try {
-    const headers = { accept: 'application/vnd.api+json', 'user-agent': 'AptekaBlisko/1.0 (open data project)' };
-    const metadataResponse = await fetch(API_URL, { signal: AbortSignal.timeout(30_000), headers });
-    if (!metadataResponse.ok) throw new Error(`API dane.gov.pl zwróciło HTTP ${metadataResponse.status}`);
-    const metadata = await metadataResponse.json();
-    const attributes = metadata.data?.attributes || {};
-    const downloadUrl = attributes.download_url || attributes.downloadUrl || attributes.link || attributes.url;
-    if (!downloadUrl) throw new Error('API dane.gov.pl nie zwróciło linku do pliku CSV dla zasobu 56869.');
-    let response = await fetch(new URL(downloadUrl, API_URL), { signal: AbortSignal.timeout(90_000), headers: { 'user-agent': headers['user-agent'] } });
-    if (!response.ok) response = await fetch(CURRENT_CSV_URL, { signal: AbortSignal.timeout(90_000), headers: { 'user-agent': headers['user-agent'] } });
-    if (!response.ok) throw new Error(`Plik źródłowy zwrócił HTTP ${response.status}`);
-    const records = normalize(await response.text());
-    await mkdir(path.dirname(destination), { recursive: true });
-    const output = [FIELDS.join(','), ...records.map((record) => FIELDS.map((field) => csvCell(record[field])).join(','))].join('\n');
-    await writeFile(destination, `${output}\n`, 'utf8');
-    console.log(`Zapisano ${records.length.toLocaleString('pl-PL')} rekordów do data/pharmacies.csv`);
+    try {
+      const metadataResponse = await fetch(API_URL, {
+        signal: AbortSignal.timeout(30_000),
+        headers: { ...requestHeaders, accept: 'application/vnd.api+json' },
+      });
+      if (!metadataResponse.ok) throw new Error(`HTTP ${metadataResponse.status}`);
+      const metadata = await metadataResponse.json();
+      const attributes = metadata.data?.attributes || {};
+      for (const candidate of [attributes.download_url, attributes.downloadUrl, attributes.download_link, attributes.file_url, attributes.link, attributes.url]) {
+        if (typeof candidate === 'string' && candidate.trim()) downloadUrls.push(new URL(candidate, API_URL).href);
+      }
+      const links = metadata.data?.links || {};
+      for (const candidate of [links.download, links.related, links.self]) {
+        if (typeof candidate === 'string' && candidate.trim()) downloadUrls.push(new URL(candidate, API_URL).href);
+        else if (candidate && typeof candidate.href === 'string') downloadUrls.push(new URL(candidate.href, API_URL).href);
+      }
+      if (downloadUrls.length === 0) errors.push('API dane.gov.pl nie zwróciło rozpoznanego linku do pliku.');
+    } catch (error) {
+      errors.push(`Metadane dane.gov.pl: ${error.message}`);
+    }
+
+    downloadUrls.push(CURRENT_CSV_URL, LEGACY_CSV_URL);
+    for (const url of [...new Set(downloadUrls)]) {
+      try {
+        const response = await fetch(url, { signal: AbortSignal.timeout(90_000), headers: requestHeaders });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const records = normalize(await response.text());
+        if (records.length === 0) throw new Error('plik nie zawiera rozpoznanych rekordów aptek');
+        await mkdir(path.dirname(destination), { recursive: true });
+        const output = [FIELDS.join(','), ...records.map((record) => FIELDS.map((field) => csvCell(record[field])).join(','))].join('\n');
+        await writeFile(destination, `${output}\n`, 'utf8');
+        console.log(`Źródło: ${url}`);
+        console.log(`Zapisano ${records.length.toLocaleString('pl-PL')} rekordów do data/pharmacies.csv`);
+        return;
+      } catch (error) {
+        errors.push(`${url}: ${error.message}`);
+      }
+    }
+    throw new Error(errors.join(' | ') || 'Nie znaleziono działającego źródła rejestru.');
   } catch (error) {
     console.error(`Nie udało się przygotować rejestru: ${error.message}`);
     process.exitCode = 1;
