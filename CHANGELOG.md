@@ -1,6 +1,12 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.2 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+
+## 1.2.0 — 2026-11-18
+
+- Oddzielono nazwę apteki od podmiotu prowadzącego.
+- Wyniki są sortowane według miejscowości i adresu, a importer zapisuje typ placówki.
+- Dodano test rozdzielenia nazwy apteki od nazwy przedsiębiorcy.
 
 ## 1.1.0 — 2026-11-18
 

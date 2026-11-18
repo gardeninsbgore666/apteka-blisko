@@ -17,3 +17,13 @@ test('czyta rejestr rozdzielany kreską i usuwa duplikaty ID', () => {
 test('odrzuca nieznany schemat źródła', () => {
   assert.throws(() => normalize('foo|bar\na|b\n'), /Nie rozpoznano kolumn/);
 });
+
+test('oddziela nazwę apteki od podmiotu prowadzącego', () => {
+  const input = [
+    'identyfikator_apteki|nazwa_apteki|nazwa_podmiotu|ulica|miejscowosc',
+    '7|Apteka od Serca|Farmacja od Serca Sp. z o.o.|Mostowa 10|Gdańsk',
+  ].join('\n');
+  const [record] = normalize(input);
+  assert.equal(record.name, 'Apteka od Serca');
+  assert.equal(record.operator, 'Farmacja od Serca Sp. z o.o.');
+});

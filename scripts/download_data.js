@@ -5,13 +5,15 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 export const API_URL = 'https://api.dane.gov.pl/1.4/resources/56869';
 const CURRENT_CSV_URL = 'https://rejestry.ezdrowie.gov.pl/api/ra/filegenerator/getcsv';
 const LEGACY_CSV_URL = 'https://rejestry.ezdrowie.gov.pl/api/filegenerator/getcsv';
-export const FIELDS = ['name', 'street', 'postal_code', 'city', 'phone'];
+export const FIELDS = ['name', 'street', 'postal_code', 'city', 'phone', 'operator', 'type'];
 const aliases = {
-  name: ['nazwa_apteki', 'nazwa', 'nazwa_podmiotu', 'nazwapodmiotu'],
-  street: ['ulica', 'adres', 'adres_apteki', 'adres_podmiotu'],
-  postal_code: ['kod_pocztowy', 'kodpocztowy', 'poczta_kod'],
+  name: ['nazwa_apteki', 'nazwaapteki', 'nazwa_punktu_aptecznego', 'nazwa_punktu', 'nazwa'],
+  street: ['ulica_apteki', 'ulica', 'adres_apteki', 'adres_placowki', 'adres'],
+  postal_code: ['kod_pocztowy_apteki', 'kod_pocztowy', 'kodpocztowy', 'poczta_kod'],
   city: ['miejscowosc', 'miasto', 'miejscowosc_apteki'],
   phone: ['telefon', 'telefon_apteki', 'numer_telefonu'],
+  operator: ['nazwa_podmiotu', 'nazwapodmiotu', 'podmiot_prowadzacy', 'nazwa_podmiotu_prowadzacego', 'firma'],
+  type: ['typ_apteki', 'rodzaj_apteki', 'rodzaj_punktu', 'typ', 'rodzaj'],
   id: ['identyfikator_apteki', 'id_apteki', 'id'],
 };
 
@@ -49,7 +51,7 @@ export function normalize(source) {
     const match = options.map(key).find((option) => columns.has(option));
     if (match) selected[field] = columns.get(match);
   }
-  if (!['name', 'street', 'city'].some((field) => selected[field] !== undefined)) {
+  if (!['name', 'street', 'city', 'operator'].some((field) => selected[field] !== undefined)) {
     throw new Error('Nie rozpoznano kolumn rejestru; format źródła mógł ulec zmianie.');
   }
   const seen = new Set();

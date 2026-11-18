@@ -10,7 +10,7 @@ Rozproszone rejestry są trudne do przeszukiwania na telefonie i bez wiedzy o ic
 
 ## Dane
 
-Źródłem jest [Rejestr aptek udostępniony w katalogu dane.gov.pl](https://dane.gov.pl/pl/dataset/1925/resource/56869), którego dostawcą jest Centrum e-Zdrowia. Skrypt pobiera aktualny plik CSV z publicznego endpointu rejestru i tworzy lokalny, znormalizowany indeks. Plik z pełnymi danymi nie jest częścią repozytorium. Mała próbka w `src/data/sample_pharmacies.csv` służy do demonstracji i testów.
+Źródłem jest [Rejestr aptek udostępniony w katalogu dane.gov.pl](https://dane.gov.pl/pl/dataset/1925/resource/56869), którego dostawcą jest Centrum e-Zdrowia. Skrypt pobiera aktualny plik CSV z publicznego endpointu rejestru i tworzy lokalny, znormalizowany indeks. Nazwa apteki jest rozdzielona od nazwy podmiotu prowadzącego, a wyniki są sortowane po miejscowości i adresie. Plik z pełnymi danymi nie jest częścią repozytorium. Mała próbka w `src/data/sample_pharmacies.csv` służy do demonstracji i testów.
 
 ## Uruchomienie
 

@@ -1,6 +1,6 @@
 # Profil danych
 
-> **Dokument:** PBL-DOC-005 · **Wersja:** 1.0 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-005 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
 
 ## Źródło
 
@@ -8,7 +8,7 @@ Rejestr aptek w katalogu [dane.gov.pl](https://dane.gov.pl/pl/dataset/1925/resou
 
 ## Przetwarzanie
 
-CSV źródłowy jest rozdzielany znakiem `|`. Skrypt `scripts/download_data.js` normalizuje go do UTF-8 CSV z polami: nazwa, ulica/adres, kod pocztowy, miejscowość i telefon. Puste rekordy są pomijane; rekordy są deduplikowane po identyfikatorze apteki (lub treści pól, jeśli identyfikator nie występuje). Nie zapisujemy pełnego surowego pliku w repozytorium.
+CSV źródłowy jest rozdzielany znakiem `|`. Skrypt `scripts/download_data.js` normalizuje go do UTF-8 CSV z polami: nazwa apteki, adres, kod pocztowy, miejscowość, telefon, podmiot prowadzący i typ placówki. Nazwa apteki jest pokazywana oddzielnie od nazwy firmy prowadzącej aptekę. Puste rekordy są pomijane; rekordy są deduplikowane po identyfikatorze apteki (lub treści pól, jeśli identyfikator nie występuje). Nie zapisujemy pełnego surowego pliku w repozytorium.
 
 ## Ograniczenia
 

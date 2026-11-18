@@ -14,6 +14,7 @@ function escapeHtml(value) {
 function render() {
   const term = query.value.trim();
   const matches = pharmacies.filter((item) => matchesQuery(item, term));
+  matches.sort((left, right) => [left.city, left.street, left.name].join(' ').localeCompare([right.city, right.street, right.name].join(' '), 'pl'));
   count.textContent = `${matches.length.toLocaleString('pl-PL')} ${matches.length === 1 ? 'wynik' : 'wyników'}`;
   area.textContent = term ? `dla „${term}”` : 'w Polsce';
   if (!matches.length) {
@@ -24,7 +25,10 @@ function render() {
     const name = item.name || 'Apteka';
     const address = [item.street, item.postal_code, item.city].filter(Boolean).join(', ') || 'Brak adresu w rejestrze';
     const mapQuery = encodeURIComponent([name, address].join(' '));
-    return `<article class="card"><div><h3>${escapeHtml(name)}</h3><div class="address">${escapeHtml(address)}</div>${item.phone ? `<div class="location">☎ ${escapeHtml(item.phone)}</div>` : ''}</div><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" target="_blank" rel="noreferrer">Pokaż na mapie ↗</a></article>`;
+    const operator = item.operator && item.operator.trim() !== name.trim()
+      ? `<div class="location">Podmiot prowadzący: ${escapeHtml(item.operator)}</div>` : '';
+    const type = item.type ? `<span class="type-tag">${escapeHtml(item.type)}</span>` : '';
+    return `<article class="card"><div><h3>${escapeHtml(name)} ${type}</h3><div class="address">${escapeHtml(address)}</div>${operator}${item.phone ? `<div class="location">☎ ${escapeHtml(item.phone)}</div>` : ''}</div><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" target="_blank" rel="noreferrer">Pokaż na mapie ↗</a></article>`;
   }).join('');
 }
 
