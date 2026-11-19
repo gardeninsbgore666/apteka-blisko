@@ -6,7 +6,7 @@ Wszystkie dokumenty projektowe w `README.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUC
 
 | Identyfikator | Dokument | Wersja | Historia |
 |---|---|---:|---|
-| PBL-DOC-001 | README | 1.2 | 2026-11-19: opis importu aktywnych wpisów i filtrowania pól |
+| PBL-DOC-001 | README | 1.3 | 2026-11-19: opis aktualnego wyszukiwania bez podpowiedzi miast |
 | PBL-DOC-002 | CONTRIBUTING | 1.0 | 2026-11-18: pierwsze wydanie |
 | PBL-DOC-003 | CODE_OF_CONDUCT | 1.0 | 2026-11-18: pierwsze wydanie |
 | PBL-DOC-004 | CHANGELOG | 1.4 | 2026-11-19: odświeżono wyszukiwarkę i uproszczono wpisywanie kryteriów |
