@@ -1,6 +1,13 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.2 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.3 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+
+## 1.3.0 — 2026-11-19
+
+- Dopasowano importer do faktycznych kolumn Rejestru Aptek: typ i nazwa ulicy, numer budynku i lokalu, telefon, nazwa apteki i właściciel.
+- Odfiltrowano rekordy nieaktywne.
+- Brakujące nazwy, telefony i kody pocztowe są jawnie oznaczane zamiast uzupełniania ich domyślnym tekstem.
+- Zweryfikowano aktualny indeks: 13 819 aktywnych rekordów i 9 aptek przy ul. Grochowskiej w Warszawie.
 
 ## 1.2.0 — 2026-11-18
 

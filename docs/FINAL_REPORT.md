@@ -1,6 +1,6 @@
 # Raport końcowy
 
-> **Dokument:** PBL-DOC-006 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-006 · **Wersja:** 1.2 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
 
 ## 1. Cel
 
@@ -8,7 +8,7 @@ Ułatwić obywatelom znalezienie zarejestrowanej apteki przez prostą, responsyw
 
 ## 2. Rezultaty
 
-Powstała aplikacja webowa z wyszukiwaniem po nazwie, miejscowości i adresie, linkiem do map, próbką demonstracyjną, skryptem pobierającym rejestr, uruchomieniem lokalnym i przez Docker Compose oraz testami normalizacji. Repozytorium przygotowano do publikacji na licencji MIT.
+Powstała aplikacja webowa z osobnymi filtrami miasta, ulicy i nazwy, linkiem do map, próbką demonstracyjną, skryptem pobierającym rejestr, uruchomieniem przez Docker Compose oraz testami normalizacji. Importer składa adres z kolumn źródłowych i odrzuca nieaktywne rekordy. W snapshotcie z 2026-11-19 znaleziono 13 819 aktywnych placówek i 9 aptek przy ul. Grochowskiej w Warszawie. Repozytorium przygotowano do publikacji na licencji MIT.
 
 ## 3. Porównanie z planem
 

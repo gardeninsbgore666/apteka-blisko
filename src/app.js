@@ -25,13 +25,17 @@ function render() {
     return;
   }
   list.innerHTML = matches.slice(0, 100).map((item) => {
-    const name = item.name || 'Apteka';
-    const address = [item.street, item.postal_code, item.city].filter(Boolean).join(', ') || 'Brak adresu w rejestrze';
+    const name = item.name || 'Apteka (nazwa niepodana)';
+    const postalCode = item.postal_code || 'kod pocztowy niepodany';
+    const address = [item.street, postalCode, item.city].filter(Boolean).join(', ') || 'Brak adresu w rejestrze';
     const mapQuery = encodeURIComponent([name, address].join(' '));
     const operator = item.operator && item.operator.trim() !== name.trim()
       ? `<div class="location">Podmiot prowadzący: ${escapeHtml(item.operator)}</div>` : '';
     const type = item.type ? `<span class="type-tag">${escapeHtml(item.type)}</span>` : '';
-    return `<article class="card"><div><h3>${escapeHtml(name)} ${type}</h3><div class="address">${escapeHtml(address)}</div>${operator}${item.phone ? `<div class="location">☎ ${escapeHtml(item.phone)}</div>` : ''}</div><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" target="_blank" rel="noreferrer">Pokaż na mapie ↗</a></article>`;
+    const phone = item.phone
+      ? `<div class="location">☎ ${escapeHtml(item.phone)}</div>`
+      : '<div class="location">Telefon niepodany w rejestrze</div>';
+    return `<article class="card"><div><h3>${escapeHtml(name)} ${type}</h3><div class="address">${escapeHtml(address)}</div>${operator}${phone}</div><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" target="_blank" rel="noreferrer">Pokaż na mapie ↗</a></article>`;
   }).join('');
 }
 

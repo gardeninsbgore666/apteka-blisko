@@ -1,6 +1,6 @@
 # Apteka Blisko
 
-> **Dokument:** PBL-DOC-001 · **Wersja:** 1.1 · **Autor:** Zespół projektowy · **Data:** 2026-11-18
+> **Dokument:** PBL-DOC-001 · **Wersja:** 1.2 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
 
 Apteka Blisko to otwarta, bezpłatna wyszukiwarka aptek zarejestrowanych w Polsce. Pomaga szybko znaleźć nazwę i adres apteki w miejscowości lub okolicy. Każdy wynik ma odnośnik do mapy.
 
@@ -10,7 +10,7 @@ Rozproszone rejestry są trudne do przeszukiwania na telefonie i bez wiedzy o ic
 
 ## Dane
 
-Źródłem jest [Rejestr aptek udostępniony w katalogu dane.gov.pl](https://dane.gov.pl/pl/dataset/1925/resource/56869), którego dostawcą jest Centrum e-Zdrowia. Skrypt pobiera aktualny plik CSV z publicznego endpointu rejestru i tworzy lokalny, znormalizowany indeks. Nazwa apteki jest rozdzielona od nazwy podmiotu prowadzącego, a wyniki są sortowane po miejscowości i adresie. Plik z pełnymi danymi nie jest częścią repozytorium. Mała próbka w `src/data/sample_pharmacies.csv` służy do demonstracji i testów.
+Źródłem jest [Rejestr aptek udostępniony w katalogu dane.gov.pl](https://dane.gov.pl/pl/dataset/1925/resource/56869), którego dostawcą jest Centrum e-Zdrowia. Skrypt pobiera aktualny plik CSV z publicznego endpointu rejestru i tworzy lokalny, znormalizowany indeks. Łączy typ ulicy, nazwę ulicy, numer budynku i opcjonalny numer lokalu, zachowuje kod pocztowy, miasto i telefon oraz pomija rekordy oznaczone jako nieaktywne. Nazwa apteki jest rozdzielona od nazwy właściciela, a wyniki są sortowane po miejscowości i adresie. Plik z pełnymi danymi nie jest częścią repozytorium. Mała próbka w `src/data/sample_pharmacies.csv` służy do demonstracji i testów.
 
 ## Uruchomienie
 

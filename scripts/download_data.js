@@ -8,12 +8,16 @@ const LEGACY_CSV_URL = 'https://rejestry.ezdrowie.gov.pl/api/filegenerator/getcs
 export const FIELDS = ['name', 'street', 'postal_code', 'city', 'phone', 'operator', 'type'];
 const aliases = {
   name: ['nazwa_apteki', 'nazwaapteki', 'nazwa_punktu_aptecznego', 'nazwa_punktu', 'nazwa'],
-  street: ['ulica_apteki', 'ulica', 'adres_apteki', 'adres_placowki', 'adres'],
+  street: ['nazwa_ulicy', 'ulica_apteki', 'ulica', 'adres_apteki', 'adres_placowki', 'adres'],
+  street_type: ['typ_ulicy'],
+  building_number: ['numer_budynku', 'nr_budynku'],
+  unit_number: ['numer_lokalu', 'nr_lokalu'],
   postal_code: ['kod_pocztowy_apteki', 'kod_pocztowy', 'kodpocztowy', 'poczta_kod'],
   city: ['miejscowosc', 'miasto', 'miejscowosc_apteki'],
   phone: ['telefon', 'telefon_apteki', 'numer_telefonu'],
-  operator: ['nazwa_podmiotu', 'nazwapodmiotu', 'podmiot_prowadzacy', 'nazwa_podmiotu_prowadzacego', 'firma'],
+  operator: ['wlasciciel_nazwa', 'nazwa_wlasciciela', 'nazwa_podmiotu', 'nazwapodmiotu', 'podmiot_prowadzacy', 'nazwa_podmiotu_prowadzacego', 'firma'],
   type: ['typ_apteki', 'rodzaj_apteki', 'rodzaj_punktu', 'typ', 'rodzaj'],
+  status: ['stan_apteki', 'status_apteki', 'status'],
   id: ['identyfikator_apteki', 'id_apteki', 'id'],
 };
 
@@ -57,7 +61,17 @@ export function normalize(source) {
   const seen = new Set();
   const result = [];
   for (const row of rows) {
-    const record = Object.fromEntries(FIELDS.map((field) => [field, (row[selected[field]] || '').trim()]));
+    const status = (row[selected.status] || '').trim().toLocaleUpperCase('pl');
+    if (selected.status !== undefined && status !== 'AKTYWNA') continue;
+
+    const streetType = (row[selected.street_type] || '').trim();
+    const streetName = (row[selected.street] || '').trim();
+    const buildingNumber = (row[selected.building_number] || '').trim();
+    const unitNumber = (row[selected.unit_number] || '').trim();
+    const streetParts = [streetType, streetName, buildingNumber].filter(Boolean);
+    if (unitNumber) streetParts.push(`lok. ${unitNumber}`);
+    const street = streetParts.length ? streetParts.join(' ') : (row[selected.street] || '').trim();
+    const record = Object.fromEntries(FIELDS.map((field) => [field, field === 'street' ? street : (row[selected[field]] || '').trim()]));
     if (!Object.values(record).some(Boolean)) continue;
     const identity = (row[selected.id] || '').trim();
     const fingerprint = identity || Object.values(record).join('|').toLocaleLowerCase('pl');
