@@ -17,13 +17,14 @@ main { max-width: 1180px; margin: auto; padding: 0 32px; }
 .hero h1 em { color: var(--green); font-style: normal; }
 .intro { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 480px; margin: 22px 0 0; }
 .search-panel { background: var(--white); padding: 22px; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 36px #1c32200a; }
-.search-panel label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
-.search-row { height: 54px; display: flex; align-items: center; border: 1px solid #d8ded6; border-radius: 9px; padding: 0 12px; gap: 10px; }
-.search-icon { font-size: 26px; color: var(--green); transform: rotate(-20deg); }
-input { font: inherit; width: 100%; border: 0; outline: 0; color: var(--ink); font-size: 14px; background: transparent; }
-input::placeholder { color: #a5aea7; }
-#clear { border: 0; background: none; font-size: 24px; color: #87918a; cursor: pointer; }
+.filter-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.filter-field { min-width: 0; }
+.filter-field label { display: block; font-size: 11px; font-weight: 700; margin: 0 0 7px; }
+.filter-field input { width: 100%; height: 43px; padding: 0 10px; border: 1px solid #d8ded6; border-radius: 8px; outline: 0; color: var(--ink); font: 13px 'DM Sans', sans-serif; background: #fff; }
+.filter-field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #216b4f18; }
+.filter-field input::placeholder { color: #a5aea7; }
 .search-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 11px; color: var(--muted); }
+.search-meta div { display: flex; gap: 12px; }
 .search-meta button { border: 0; background: none; color: var(--green); font: inherit; font-weight: 700; cursor: pointer; }
 .results { padding: 46px 0 58px; }
 .results-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 20px; }
@@ -51,6 +52,7 @@ footer a { color: var(--green); }
   .hero h1 { font-size: 48px; letter-spacing: -2px; }
   .intro { font-size: 14px; }
   .cards { grid-template-columns: 1fr; }
+  .filter-fields { grid-template-columns: 1fr; }
   .results-heading { align-items: start; gap: 8px; flex-direction: column; }
   .results { padding: 34px 0 42px; }
   footer { gap: 10px; flex-wrap: wrap; }

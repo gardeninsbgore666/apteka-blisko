@@ -1,6 +1,8 @@
-import { matchesQuery } from './search.js';
+import { matchesFilters } from './search.js';
 
-const query = document.querySelector('#query');
+const cityInput = document.querySelector('#city');
+const streetInput = document.querySelector('#street');
+const nameInput = document.querySelector('#name');
 const list = document.querySelector('#results-list');
 const count = document.querySelector('#result-count');
 const area = document.querySelector('#area-label');
@@ -12,13 +14,14 @@ function escapeHtml(value) {
 }
 
 function render() {
-  const term = query.value.trim();
-  const matches = pharmacies.filter((item) => matchesQuery(item, term));
+  const filters = { city: cityInput.value, street: streetInput.value, name: nameInput.value };
+  const activeFilters = Object.values(filters).map((value) => value.trim()).filter(Boolean);
+  const matches = pharmacies.filter((item) => matchesFilters(item, filters));
   matches.sort((left, right) => [left.city, left.street, left.name].join(' ').localeCompare([right.city, right.street, right.name].join(' '), 'pl'));
   count.textContent = `${matches.length.toLocaleString('pl-PL')} ${matches.length === 1 ? 'wynik' : 'wyników'}`;
-  area.textContent = term ? `dla „${term}”` : 'w Polsce';
+  area.textContent = activeFilters.length ? `— ${activeFilters.join(' · ')}` : 'w Polsce';
   if (!matches.length) {
-    list.innerHTML = '<div class="empty">Nie znaleźliśmy apteki. Sprawdź pisownię albo wpisz samą nazwę miejscowości.</div>';
+    list.innerHTML = '<div class="empty">Nie znaleźliśmy apteki dla tych kryteriów. Zmień miasto, ulicę lub nazwę.</div>';
     return;
   }
   list.innerHTML = matches.slice(0, 100).map((item) => {
@@ -32,9 +35,20 @@ function render() {
   }).join('');
 }
 
-query.addEventListener('input', render);
-document.querySelector('#clear').addEventListener('click', () => { query.value = ''; query.focus(); render(); });
-document.querySelector('#show-all').addEventListener('click', () => { query.value = ''; render(); });
+for (const input of [cityInput, streetInput, nameInput]) input.addEventListener('input', render);
+document.querySelector('#clear').addEventListener('click', () => {
+  cityInput.value = '';
+  streetInput.value = '';
+  nameInput.value = '';
+  cityInput.focus();
+  render();
+});
+document.querySelector('#show-all').addEventListener('click', () => {
+  cityInput.value = '';
+  streetInput.value = '';
+  nameInput.value = '';
+  render();
+});
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 fetch('/api/pharmacies').then((response) => {
@@ -42,6 +56,8 @@ fetch('/api/pharmacies').then((response) => {
   return response.json();
 }).then((payload) => {
   pharmacies = payload.records || [];
+  const cities = [...new Set(pharmacies.map((item) => item.city).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pl'));
+  document.querySelector('#city-options').innerHTML = cities.map((city) => `<option value="${escapeHtml(city)}"></option>`).join('');
   state.textContent = payload.source === 'live' ? 'Pełny rejestr aptek' : 'Próbka demonstracyjna';
   render();
 }).catch(() => {

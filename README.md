@@ -34,7 +34,7 @@ Po pobraniu odśwież stronę. Dane zostaną zapisane lokalnie w `data/pharmacie
 
 ## Użycie
 
-Wpisz miejscowość, nazwę apteki, ulicę lub kod pocztowy. Lista filtruje się na bieżąco. Przycisk „Pokaż na mapie” otwiera mapę w nowej karcie. Wersja demonstracyjna korzysta z jawnie oznaczonej próbki.
+Wpisz kryteria osobno: miasto, ulicę i/lub nazwę apteki. Miasto podpowiada miejscowości z załadowanego rejestru; pozostałe pola możesz łączyć dowolnie. Lista filtruje się na bieżąco. Przycisk „Pokaż na mapie” otwiera mapę w nowej karcie. Wersja demonstracyjna korzysta z jawnie oznaczonej próbki.
 
 ## Struktura
 

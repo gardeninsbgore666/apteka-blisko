@@ -4,6 +4,7 @@
 
 ## 1.2.0 — 2026-11-18
 
+- Dodano osobne filtry miasta, ulicy i nazwy apteki z podpowiedziami miejscowości.
 - Oddzielono nazwę apteki od podmiotu prowadzącego.
 - Wyniki są sortowane według miejscowości i adresu, a importer zapisuje typ placówki.
 - Dodano test rozdzielenia nazwy apteki od nazwy przedsiębiorcy.
