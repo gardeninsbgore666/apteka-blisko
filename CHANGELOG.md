@@ -1,6 +1,13 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.3 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.4 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+
+## 1.4.0 — 2026-11-19
+
+- Odświeżono wygląd wyszukiwarki i kart wyników, poprawiono układ na telefonach oraz widoczne stany fokusu.
+- Usunięto dużą listę podpowiedzi miast; filtrowanie działa bezpośrednio podczas wpisywania.
+- Dodano obsługę Enter (przejście do wyników) i Escape (wyczyszczenie bieżącego pola).
+- Ograniczono zaznaczanie tekstów pomocniczych, pozostawiając możliwość zaznaczania danych aptek.
 
 ## 1.3.0 — 2026-11-19
 

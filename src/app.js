@@ -39,7 +39,16 @@ function render() {
   }).join('');
 }
 
-for (const input of [cityInput, streetInput, nameInput]) input.addEventListener('input', render);
+for (const input of [cityInput, streetInput, nameInput]) {
+  input.addEventListener('input', render);
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') document.querySelector('#results-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (event.key === 'Escape' && input.value) {
+      input.value = '';
+      render();
+    }
+  });
+}
 document.querySelector('#clear').addEventListener('click', () => {
   cityInput.value = '';
   streetInput.value = '';
@@ -52,6 +61,7 @@ document.querySelector('#show-all').addEventListener('click', () => {
   streetInput.value = '';
   nameInput.value = '';
   render();
+  document.querySelector('#results-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 document.querySelector('#year').textContent = new Date().getFullYear();
 
@@ -60,8 +70,6 @@ fetch('/api/pharmacies').then((response) => {
   return response.json();
 }).then((payload) => {
   pharmacies = payload.records || [];
-  const cities = [...new Set(pharmacies.map((item) => item.city).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pl'));
-  document.querySelector('#city-options').innerHTML = cities.map((city) => `<option value="${escapeHtml(city)}"></option>`).join('');
   state.textContent = payload.source === 'live' ? 'Pełny rejestr aptek' : 'Próbka demonstracyjna';
   render();
 }).catch(() => {
