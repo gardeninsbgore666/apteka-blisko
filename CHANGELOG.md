@@ -1,6 +1,11 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.4 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.5 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+
+## 1.5.0 — 2026-11-19
+
+- Dodano lokalne pomiary parsowania i filtrowania pełnego indeksu do README i raportu końcowego.
+- Uaktualniono status publicznego repozytorium; potwierdzenie najnowszego wdrożenia demo pozostaje do wykonania.
 
 ## 1.4.0 — 2026-11-19
 
