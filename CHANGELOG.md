@@ -7,7 +7,7 @@
 - Odświeżono wygląd wyszukiwarki i kart wyników, poprawiono układ na telefonach oraz widoczne stany fokusu.
 - Usunięto dużą listę podpowiedzi miast; filtrowanie działa bezpośrednio podczas wpisywania.
 - Dodano obsługę Enter (przejście do wyników) i Escape (wyczyszczenie bieżącego pola).
-- Ograniczono zaznaczanie tekstów pomocniczych, pozostawiając możliwość zaznaczania danych aptek.
+- Zablokowano zaznaczanie tekstów interfejsu, pozostawiając możliwość zaznaczania danych aptek; logo nie odświeża już strony po kliknięciu.
 
 ## 1.3.0 — 2026-11-19
 

@@ -9,7 +9,7 @@ body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM 
 .brand { text-decoration: none; color: var(--ink); font-family: Manrope, sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -.4px; display: flex; align-items: center; gap: 8px; }
 .brand b { font-weight: 800; }
 .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: var(--green); color: #fff; font-size: 23px; font-weight: 500; line-height: 1; }
-.open-data, .updated { color: var(--muted); font-size: 12px; }
+.open-data, .updated { color: var(--muted); font-size: 12px; user-select: none; }
 .open-data::before { content: '●'; color: #83b47c; margin-right: 8px; }
 main { max-width: 1180px; margin: auto; padding: 0 32px; }
 .hero { padding: 76px 0 58px; display: grid; grid-template-columns: 1fr .92fr; gap: 64px; align-items: center; border-bottom: 1px solid var(--line); }
@@ -35,6 +35,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #91bc63; outline-offs
 .results-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 20px; }
 .results-heading .eyebrow { margin-bottom: 8px; }
 .results h2 { font: 700 27px Manrope, sans-serif; letter-spacing: -.8px; margin: 0; }
+.results h2, .results-heading, .search-meta, .disclaimer, footer { user-select: none; }
 .results h2 span { color: var(--green); }
 .updated { padding-bottom: 5px; }
 .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
