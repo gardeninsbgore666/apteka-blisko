@@ -1,6 +1,12 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.5 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.6 · **Autor:** Zespół projektowy · **Data:** 2026-11-23
+
+## 1.6.0 — 2026-11-23
+
+- Przeniesiono zatwierdzony nowy wygląd na główną stronę aplikacji.
+- Uporządkowano wyniki w karty i dodano wyświetlanie kolejnych 12 aptek na żądanie.
+- Zachowano wyszukiwanie po mieście, ulicy i nazwie, linki do map, obsługę klawiatury oraz responsywny układ.
 
 ## 1.5.0 — 2026-11-19
 

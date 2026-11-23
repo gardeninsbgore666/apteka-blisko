@@ -3,29 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f6f2">
-  <meta name="description" content="Znajdź aptekę według miejscowości, nazwy lub adresu.">
-  <title>Apteka Blisko — znajdź aptekę</title>
+  <meta name="theme-color" content="#10271f">
+  <meta name="description" content="Znajdź aptekę w swojej okolicy dzięki publicznemu rejestrowi aptek.">
+  <title>Apteka Blisko — znajdź aptekę w okolicy</title>
   <link rel="stylesheet" href="/style.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
-  <header class="topbar"><div class="brand" aria-label="Apteka Blisko"><span class="brand-mark" aria-hidden="true">+</span> Apteka <b>Blisko</b></div><span class="open-data">Oparte na otwartych danych</span></header>
+  <header class="site-header wrap">
+    <div class="brand" aria-label="Apteka Blisko"><span class="brand-icon" aria-hidden="true">+</span><span>apteka<span class="brand-light">blisko</span></span></div>
+    <div class="header-note"><span class="status-dot"></span> Wyszukiwarka z otwartych danych</div>
+  </header>
+
   <main>
-    <section class="hero" aria-labelledby="title">
-      <div class="hero-copy"><p class="eyebrow">PROSTY SPOSÓB, BY ZNALEŹĆ POMOC</p><h1 id="title">Znajdź aptekę<br><em>w swojej okolicy.</em></h1><p class="intro">Uzupełnij jedno lub kilka pól. Wyniki pochodzą z publicznego rejestru.</p></div>
-      <div class="search-panel" aria-label="Filtry aptek">
-        <div class="filter-fields">
-          <div class="filter-field"><label for="city">Miasto</label><input id="city" type="search" placeholder="Np. Gdańsk" autocomplete="off" aria-describedby="search-hint"></div>
-          <div class="filter-field"><label for="street">Ulica</label><input id="street" type="search" placeholder="Np. Mostowa" autocomplete="off"></div>
-          <div class="filter-field"><label for="name">Nazwa apteki</label><input id="name" type="search" placeholder="Np. od Serca" autocomplete="off"></div>
-        </div>
-        <p id="search-hint" class="search-hint">Wpisz miasto, ulicę lub nazwę. Możesz łączyć kryteria.</p>
-        <div class="search-meta"><span id="result-count" aria-live="polite">Ładowanie danych…</span><div><button id="clear" type="button">Wyczyść filtry</button><button id="show-all" type="button">Pokaż wszystkie</button></div></div>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>01</span> APTEKI W CAŁEJ POLSCE</p>
+        <h1 id="hero-title">Dobra apteka.<br><em>Blisko Ciebie.</em></h1>
+        <p class="hero-lede">Znajdź adres i telefon apteki w swojej okolicy. Bez przekopywania się przez rejestry.</p>
+        <div class="hero-proof"><span class="proof-icon" aria-hidden="true">↳</span><span>Aktualny rejestr publiczny<br><b>Centrum e‑Zdrowia</b></span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+        <div class="art-cross">+</div>
+        <div class="art-pill"><span></span><i></i></div>
+        <div class="art-sticker"><span>ZDROWIE</span><b>zaczyna się<br>blisko.</b><span class="sticker-star">✳</span></div>
+        <div class="art-caption">POLSKA · OTWARTE DANE</div>
       </div>
     </section>
-    <section class="results" aria-labelledby="results-title"><div class="results-heading"><div><p class="eyebrow">WYNIKI WYSZUKIWANIA</p><h2 id="results-title">Apteki <span id="area-label">w Polsce</span></h2></div><span class="updated" id="data-state">Ładowanie rejestru</span></div><div id="results-list" class="cards" aria-live="polite"></div><p class="disclaimer"><span aria-hidden="true">ⓘ</span> Rejestr nie podaje bieżących godzin otwarcia ani dostępności leków. Zadzwoń do apteki przed wizytą.</p></section>
+
+    <section class="search-wrap wrap" aria-label="Wyszukiwarka aptek">
+      <div class="search-card">
+        <div class="search-top"><div><p class="eyebrow dark"><span>02</span> ZAWĘŹ WYNIKI</p><h2>Gdzie szukamy?</h2></div><span class="search-mark" aria-hidden="true">⌕</span></div>
+        <div class="filters">
+          <label class="filter"><span class="filter-icon" aria-hidden="true">⌖</span><span class="filter-content"><span class="filter-label">MIASTO</span><input id="city" type="search" placeholder="Np. Warszawa" autocomplete="off"></span></label>
+          <label class="filter"><span class="filter-icon" aria-hidden="true">↗</span><span class="filter-content"><span class="filter-label">ULICA</span><input id="street" type="search" placeholder="Np. Grochowska" autocomplete="off"></span></label>
+          <label class="filter"><span class="filter-icon" aria-hidden="true">✳</span><span class="filter-content"><span class="filter-label">NAZWA APTEKI</span><input id="name" type="search" placeholder="Np. od Serca" autocomplete="off"></span></label>
+          <button class="clear-button" id="clear" type="button" aria-label="Wyczyść kryteria wyszukiwania">Wyczyść <span aria-hidden="true">↺</span></button>
+        </div>
+        <p class="search-hint">Wyniki aktualizują się podczas wpisywania. Możesz wypełnić jedno lub kilka pól.</p>
+      </div>
+    </section>
+
+    <section class="results wrap" aria-labelledby="results-title">
+      <div class="results-heading">
+        <div><p class="eyebrow"><span>03</span> WYNIKI W TWOJEJ OKOLICY</p><h2 id="results-title">Apteki <span id="area-label">w Polsce</span></h2></div>
+        <div class="result-total"><strong id="result-count" aria-live="polite">Ładowanie…</strong><span id="data-state">Połączenie z rejestrem</span></div>
+      </div>
+      <div id="results-list" class="results-grid" aria-live="polite"></div>
+      <button class="more-button" id="show-more" type="button" hidden>Pokaż kolejne apteki <span aria-hidden="true">↓</span></button>
+      <p class="disclaimer"><span aria-hidden="true">i</span> Rejestr nie zawiera bieżących godzin otwarcia ani dostępności leków. Przed wizytą zadzwoń do apteki.</p>
+    </section>
   </main>
-  <footer><span>Apteka Blisko <span id="year"></span></span><span>Dane: <a href="https://dane.gov.pl/pl/dataset/1925/resource/56869" target="_blank" rel="noreferrer">Rejestr aptek · dane.gov.pl</a></span><span>Projekt open source · MIT</span></footer>
+
+  <footer class="site-footer wrap"><span>apteka<span class="brand-light">blisko</span> <span id="year"></span></span><span>Dane: <a href="https://dane.gov.pl/pl/dataset/1925/resource/56869" target="_blank" rel="noreferrer">Rejestr aptek · dane.gov.pl ↗</a></span><span>Otwarty projekt · MIT</span></footer>
 </body>
 </html>

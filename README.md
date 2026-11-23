@@ -1,6 +1,6 @@
 # Apteka Blisko
 
-> **Dokument:** PBL-DOC-001 · **Wersja:** 1.4 · **Autor:** Zespół projektowy · **Data:** 2026-11-19
+> **Dokument:** PBL-DOC-001 · **Wersja:** 1.5 · **Autor:** Zespół projektowy · **Data:** 2026-11-23
 
 Apteka Blisko to otwarta, bezpłatna wyszukiwarka aptek zarejestrowanych w Polsce. Pomaga szybko znaleźć nazwę i adres apteki w miejscowości lub okolicy. Każdy wynik ma odnośnik do mapy.
 
@@ -34,7 +34,7 @@ Po pobraniu odśwież stronę. Dane zostaną zapisane lokalnie w `data/pharmacie
 
 ## Użycie
 
-Wpisz kryteria osobno: miasto, ulicę i/lub nazwę apteki. Możesz łączyć pola, a wyniki filtrują się na bieżąco bez rozwijanej listy podpowiedzi. Enter przewija do wyników, a Escape czyści aktualne pole. Przycisk „Pokaż na mapie” otwiera mapę w nowej karcie. Wersja demonstracyjna korzysta z jawnie oznaczonej próbki.
+Wpisz kryteria osobno: miasto, ulicę i/lub nazwę apteki. Możesz łączyć pola, a wyniki filtrują się na bieżąco bez rozwijanej listy podpowiedzi. Lista pokazuje wyniki po 12, a przycisk „Pokaż kolejne apteki” wyświetla następną porcję. Enter przewija do wyników, a Escape czyści aktualne pole. Przycisk „Mapa” otwiera lokalizację w nowej karcie. Wersja demonstracyjna korzysta z jawnie oznaczonej próbki.
 
 ## Struktura
 
