@@ -1,6 +1,10 @@
 # Historia zmian
 
-> **Dokument:** PBL-DOC-004 · **Wersja:** 1.6 · **Autor:** Zespół projektowy · **Data:** 2026-11-23
+> **Dokument:** PBL-DOC-004 · **Wersja:** 1.7 · **Autor:** Zespół projektowy · **Data:** 2026-11-23
+
+## 1.7.0 — 2026-11-23
+
+- Wyłączono zaznaczanie ozdobnych napisów w nagłówku i grafice hero.
 
 ## 1.6.0 — 2026-11-23
 
